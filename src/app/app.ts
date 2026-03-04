@@ -1,13 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { Heroes } from './heroes/heroes';
+import { MessagesComponent } from './messages/messages';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Heroes],
+  imports: [RouterOutlet, Heroes, MessagesComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title  = 'Tour of Heroes';
+  protected readonly title = 'Tour of Heroes';
 }
