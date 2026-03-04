@@ -1,16 +1,10 @@
 <h2>My Heroes</h2>
 <ul class="heroes">
-  @for (hero of heroes; track hero.id) {
-    <li>
-      <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span>
-        <span class="name">{{hero.name}}</span>
-        @if (hero.power) {
-          <span>💥</span>
-        }
-      </button>
-    </li>
+  @if (heroes$ | async; as heroes) {
+    @for (hero of heroes; track hero.id) {
+      <li>
+        <app-hero-item [hero]="hero" (heroSelected)="onHeroSelected($event)" />
+      </li>
+    }
   }
 </ul>
-
-<app-hero-detail [hero]="selectedHero" />
