@@ -1,0 +1,26 @@
+.heroes-menu {
+  padding: 0;
+  margin: auto;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.heroes-menu a {
+  text-decoration: none;
+  color: white;
+  background-color: #42545c;
+  padding: 1rem;
+  border-radius: 4px;
+  min-width: 8em;
+  text-align: center;
+  display: inline-block;
+}
+
+.heroes-menu a:hover {
+  background-color: #eee;
+  color: #607d8b;
+}
