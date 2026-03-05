@@ -1,34 +1,33 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { MessageService } from '../message.service';
-import { FormsModule } from '@angular/forms';
-import { HeroDetailComponent } from '../hero-detail/hero-detail';
+import { Router } from '@angular/router';
+import { HeroItemComponent } from './hero-item/hero-item';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.html',
   styleUrl: './heroes.scss',
   standalone: true,
-  imports: [FormsModule, HeroDetailComponent],
+  imports: [HeroItemComponent, AsyncPipe],
 })
 export class Heroes implements OnInit {
-  heroes: Hero[] = [];
-  selectedHero?: Hero;
+  heroes$!: Observable<Hero[]>;
 
   private heroService = inject(HeroService);
-  private messageService = inject(MessageService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
+  getHeroes(): void {
+    this.heroes$ = this.heroService.getHeroes();
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
+  onHeroSelected(id: number): void {
+    this.router.navigate(['/detail', id]);
   }
 }
